@@ -1,0 +1,25 @@
+server:
+  port: 8080
+spring:
+  redis:
+    host: 47.113.102.247
+    port: 6381
+  datasource:
+    druid:
+      driver-class-name:  com.mysql.cj.jdbc.Driver
+      username: root
+      password: 112200
+      url: jdbc:mysql://47.113.102.247:3306/sw_db?useUnicode=true&characterEncoding=UTF-8&useSSL=false&serverTimezone=GMT%2B8
+
+
+jackson:
+  time-zone: GMT+8
+  date-format: yyyy-MM-dd HH:mm:ss
+
+mybatis:
+  mapper-locations: classpath:mapper/*Mapper.xml
+  type-aliases-package: com.tools.bys
+  configuration:
+    map-underscore-to-camel-case: true
+
+
