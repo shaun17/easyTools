@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tools.bys.biz.generator.mapper.TMainMapper">
+
+    <resultMap id="BaseResultMap" type="com.tools.bys.biz.generator.domain.TMain">
+            <id property="id" column="id" jdbcType="INTEGER"/>
+            <result property="column1" column="column1" jdbcType="INTEGER"/>
+            <result property="column2" column="column2" jdbcType="VARCHAR"/>
+            <result property="column3" column="column3" jdbcType="TIMESTAMP"/>
+            <collection property="subList" resultMap="com.tools.bys.biz.generator.mapper.TSubMapper.BaseResultMap">
+
+            </collection>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,column1,column2,
+        column3
+    </sql>
+
+    <select id="getLeftJoinSub" resultMap="BaseResultMap">
+        select * from t_main a left join t_sub b on a.id=b.main_id
+    </select>
+</mapper>

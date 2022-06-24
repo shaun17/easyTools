@@ -2,6 +2,7 @@ package com.tools.bys.biz.generator.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.tools.bys.biz.generator.domain.TxTest;
+import com.tools.bys.vo.TxTestDO;
 
 import java.util.List;
 
@@ -13,5 +14,9 @@ import java.util.List;
 public interface TxTestService extends IService<TxTest> {
 
      List<TxTest> getAllByLimite();
+
+     TxTest getAOneById(int id);
+
+     TxTest insertOne(TxTestDO txTestDO);
 
 }
