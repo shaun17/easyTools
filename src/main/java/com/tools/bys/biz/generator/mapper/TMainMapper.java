@@ -15,4 +15,6 @@ import java.util.List;
 public interface TMainMapper extends BaseMapper<TMain> {
 
     List<TMain> getLeftJoinSub();
+
+    List<TMain> getLeftJoinSubOne(int id);
 }

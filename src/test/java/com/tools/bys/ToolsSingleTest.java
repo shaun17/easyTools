@@ -14,7 +14,6 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 
 import java.util.HashMap;
-
 import static org.hamcrest.Matchers.*;
 
 
@@ -32,7 +31,6 @@ class ToolsSingleTest {
         MockMvcResponse mockMvcResponse = givenRestAssuredSpecification.when().get("/single/getAll");
         mockMvcResponse.prettyPrint();
     }
-
 
     @Test
     void getMethod2() {

@@ -1,5 +1,8 @@
 package com.tools.bys.biz.generator.domain;
 
+import lombok.Builder;
+import lombok.Data;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -7,6 +10,8 @@ import java.util.Date;
  * 
  * @TableName t_sub
  */
+@Data
+@Builder
 public class TSub implements Serializable {
     /**
      * 

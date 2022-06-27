@@ -28,9 +28,6 @@ public class TxTest implements Serializable {
      */
     private String column2;
 
-    @TableField(exist = false )
-    private List<String> detail = new ArrayList<>();
-
     private static final long serialVersionUID = 1L;
 
     /**

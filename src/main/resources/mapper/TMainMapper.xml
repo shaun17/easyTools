@@ -9,8 +9,12 @@
             <result property="column1" column="column1" jdbcType="INTEGER"/>
             <result property="column2" column="column2" jdbcType="VARCHAR"/>
             <result property="column3" column="column3" jdbcType="TIMESTAMP"/>
-            <collection property="subList" resultMap="com.tools.bys.biz.generator.mapper.TSubMapper.BaseResultMap">
-
+            <collection property="subList" ofType="com.tools.bys.biz.generator.domain.TSub">
+                <id property="id" column="bid" jdbcType="INTEGER"/>
+                <result property="mainId" column="bmain_id" jdbcType="INTEGER"/>
+                <result property="column1" column="bcloumn1" jdbcType="INTEGER"/>
+                <result property="column2" column="bcolumn2" jdbcType="VARCHAR"/>
+                <result property="column3" column="bcolumn3" jdbcType="TIMESTAMP"/>
             </collection>
     </resultMap>
 
@@ -20,6 +24,31 @@
     </sql>
 
     <select id="getLeftJoinSub" resultMap="BaseResultMap">
-        select * from t_main a left join t_sub b on a.id=b.main_id
+        select a.*,
+               b.id as bid,
+               b.main_id as bmain_id,
+               b.column1 as bcloumn1,
+               b.column2 as bcolumn2,
+               b.column3 as bcolumn3
+        from t_main a left join t_sub b on a.id=b.main_id
+        <where>
+            <if test="id != null">
+                a.id = ${id}
+            </if>
+        </where>
+    </select>
+    <select id="getLeftJoinSubOne" parameterType="int" resultMap="BaseResultMap">
+        select a.*,
+               b.id as bid,
+               b.main_id as bmain_id,
+               b.column1 as bcloumn1,
+               b.column2 as bcolumn2,
+               b.column3 as bcolumn3
+        from t_main a left join t_sub b on a.id=b.main_id
+        <where>
+            <if test="id != null">
+                a.id = ${id}
+            </if>
+        </where>
     </select>
 </mapper>

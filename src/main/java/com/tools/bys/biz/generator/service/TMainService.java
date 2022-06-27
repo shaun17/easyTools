@@ -3,6 +3,7 @@ package com.tools.bys.biz.generator.service;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.tools.bys.biz.generator.domain.TMain;
 import com.tools.bys.biz.generator.domain.TSub;
+import com.tools.bys.vo.MultipleDo;
 
 /**
 * @author shaunwen
@@ -12,6 +13,10 @@ import com.tools.bys.biz.generator.domain.TSub;
 public interface TMainService extends IService<TMain> {
 
     Object getMainWithSubAll();
+
+    Object getMainWithSubOne(int mainId);
+
+    Object addMainAndSub(MultipleDo multipleDo);
 
 
 }

@@ -1,6 +1,8 @@
 package com.tools.bys.biz.generator.domain;
 
 import com.baomidou.mybatisplus.annotation.TableField;
+import lombok.Builder;
+import lombok.Data;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -10,6 +12,8 @@ import java.util.List;
  * 
  * @TableName t_main
  */
+@Data
+@Builder
 public class TMain implements Serializable {
     /**
      * 
