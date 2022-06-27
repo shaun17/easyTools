@@ -4,12 +4,16 @@ import com.tools.bys.biz.generator.service.TxTestService;
 import com.tools.bys.vo.TxTestDO;
 import lombok.NonNull;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Async;
+import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.concurrent.Callable;
 
 
 @RestController
@@ -32,5 +36,10 @@ public class SingleController {
     @PostMapping("/insert")
     public Object insertOne(@RequestBody TxTestDO txTestDO){
         return service.insertOne(txTestDO);
+    }
+
+    @PostMapping("/asy")
+    public Callable asy(@RequestBody int id){
+        return () -> service.getAOneById(id);
     }
 }
