@@ -1,7 +1,9 @@
 package com.tools.bys.biz.generator.domain;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -10,8 +12,10 @@ import java.util.Date;
  * 
  * @TableName t_sub
  */
-@Data
 @Builder
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class TSub implements Serializable {
     /**
      * 

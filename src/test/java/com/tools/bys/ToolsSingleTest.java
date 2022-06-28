@@ -19,6 +19,7 @@ import org.springframework.boot.test.json.JsonContent;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MockMvcBuilder;
+import org.springframework.test.web.servlet.ResultMatcher;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 
@@ -39,8 +40,8 @@ class ToolsSingleTest {
     void getMethod1() {
         MockMvcRequestSpecification givenRestAssuredSpecification = RestAssuredMockMvc.given()
                 .standaloneSetup(singleController);
-        MockMvcResponse mockMvcResponse = givenRestAssuredSpecification.when().get("/single/getAll");
-        mockMvcResponse.prettyPrint();
+        givenRestAssuredSpecification.when().get("/single/getAll").then().log().all().assertThat();
+
     }
 
     @Test
