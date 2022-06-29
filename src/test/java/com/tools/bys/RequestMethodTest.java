@@ -7,7 +7,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import static io.restassured.RestAssured.*;
 
 /**
- * 先启项目，通过启动项目测试接口
+ * 先启项目，通过启动的项目测试接口
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 public class RequestMethodTest {

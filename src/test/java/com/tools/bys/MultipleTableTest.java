@@ -2,24 +2,17 @@ package com.tools.bys;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import com.tools.bys.biz.generator.domain.TSub;
 import com.tools.bys.controller.MultipleController;
-import com.tools.bys.controller.SingleController;
 import com.tools.bys.vo.MultipleDo;
 import io.restassured.module.mockmvc.RestAssuredMockMvc;
-import io.restassured.module.mockmvc.response.MockMvcResponse;
-import io.restassured.module.mockmvc.response.ValidatableMockMvcResponse;
 import io.restassured.module.mockmvc.specification.MockMvcRequestSpecification;
 import io.restassured.path.json.JsonPath;
 import lombok.extern.slf4j.Slf4j;
-import org.hamcrest.MatcherAssert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.test.context.junit4.SpringRunner;
-import static org.hamcrest.Matchers.*;
 
 import java.util.Arrays;
 import java.util.Date;
@@ -28,27 +21,27 @@ import java.util.List;
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @RunWith(SpringRunner.class)
 @Slf4j
-public class MultipleTest {
+public class MultipleTableTest {
 
     @Autowired
     MultipleController multipleController;
 
     @Test
-    public void getMethod1() {
+    public void tesGetAll() {
         MockMvcRequestSpecification givenRestAssuredSpecification = RestAssuredMockMvc.given()
                 .standaloneSetup(multipleController);
         givenRestAssuredSpecification.when().get("/multiple/getAll").then().log().all();
     }
 
     @Test
-    public void getMethod2() {
+    public void tesGetOne() {
         MockMvcRequestSpecification givenRestAssuredSpecification = RestAssuredMockMvc.given()
                 .standaloneSetup(multipleController);
         givenRestAssuredSpecification.param("id", 2).when().get("/multiple/getOne").then().log().all();
     }
 
     @Test
-    public void getMethod3() {
+    public void tesGetOne2() {
         MockMvcRequestSpecification givenRestAssuredSpecification = RestAssuredMockMvc.given()
                 .standaloneSetup(multipleController);
         String id = givenRestAssuredSpecification.param("id", 2).when().get("/multiple/getOne").andReturn().asString();
@@ -57,7 +50,7 @@ public class MultipleTest {
     }
 
     @Test
-    public void postMethod1() {
+    public void testPostInsert() {
         MockMvcRequestSpecification givenRestAssuredSpecification = RestAssuredMockMvc.given()
                 .standaloneSetup(multipleController);
 

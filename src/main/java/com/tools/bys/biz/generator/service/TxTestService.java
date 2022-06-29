@@ -19,4 +19,6 @@ public interface TxTestService extends IService<TxTest> {
 
      TxTest insertOne(TxTestDO txTestDO);
 
+     TxTest updateOne(TxTestDO txTestDO);
+
 }

@@ -39,4 +39,14 @@ public class TxTestServiceImpl extends ServiceImpl<TxTestMapper, TxTest> impleme
         int insert = baseMapper.insert(txTest);
         return txTest;
     }
+
+    @Override
+    public TxTest updateOne(TxTestDO txTestDO) {
+        TxTest txTest = new TxTest();
+        txTest.setId(txTestDO.getId());
+        txTest.setColumn1(txTestDO.getColumn1());
+        txTest.setColumn2(txTestDO.getColumn2());
+        int i = baseMapper.updateById(txTest);
+        return txTest;
+    }
 }

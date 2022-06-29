@@ -36,6 +36,11 @@ public class SingleController {
         return service.insertOne(txTestDO);
     }
 
+    @PostMapping("/update")
+    public Object updateOne(@RequestBody TxTestDO txTestDO){
+        return service.updateOne(txTestDO);
+    }
+
     @PostMapping("/asy")
     public Callable asy(@RequestBody int id){
         return () -> service.getAOneById(id);

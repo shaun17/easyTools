@@ -1,43 +1,33 @@
 package com.tools.bys;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
+import com.tools.bys.biz.generator.domain.TxTest;
 import com.tools.bys.controller.SingleController;
 import com.tools.bys.vo.TxTestDO;
-import io.restassured.RestAssured;
 import io.restassured.module.mockmvc.RestAssuredMockMvc;
-import io.restassured.module.mockmvc.config.RestAssuredMockMvcConfig;
 import io.restassured.module.mockmvc.response.MockMvcResponse;
-import io.restassured.module.mockmvc.response.ValidatableMockMvcResponse;
-import io.restassured.module.mockmvc.specification.MockMvcRequestAsyncConfigurer;
 import io.restassured.module.mockmvc.specification.MockMvcRequestSpecification;
-import io.restassured.module.spring.commons.config.AsyncConfig;
+import io.restassured.path.json.JsonPath;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.json.JsonContent;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.MockMvcBuilder;
-import org.springframework.test.web.servlet.ResultMatcher;
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
-
-import java.util.HashMap;
-import java.util.concurrent.TimeUnit;
 
 import static org.hamcrest.Matchers.*;
 
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @RunWith(SpringJUnit4ClassRunner.class)
-class ToolsSingleTest {
+class SingleTableTest {
 
     @Autowired
     SingleController singleController;
 
     @Test
-    void getMethod1() {
+    void testGetAll() {
         MockMvcRequestSpecification givenRestAssuredSpecification = RestAssuredMockMvc.given()
                 .standaloneSetup(singleController);
         givenRestAssuredSpecification.when().get("/single/getAll").then().log().all().assertThat();
@@ -45,7 +35,7 @@ class ToolsSingleTest {
     }
 
     @Test
-    void getMethod2() {
+    void testGetOne() {
         MockMvcRequestSpecification givenRestAssuredSpecification = RestAssuredMockMvc.given()
                 .standaloneSetup(singleController);
 
@@ -54,7 +44,7 @@ class ToolsSingleTest {
     }
 
     @Test
-    void getMethod3() {
+    void testGetOne2() {
         MockMvcRequestSpecification givenRestAssuredSpecification = RestAssuredMockMvc.given()
                 .standaloneSetup(singleController);
 
@@ -63,7 +53,7 @@ class ToolsSingleTest {
                 .body("column1", equalTo("beijing"));
     }
     @Test
-    void getMethod4() {
+    void testAsy() {
         MockMvcRequestSpecification givenRestAssuredSpecification = RestAssuredMockMvc.given()
                 .standaloneSetup(singleController);
 
@@ -72,16 +62,22 @@ class ToolsSingleTest {
     }
 
     @Test
-    void postMethod1() {
+    void testPostInsert() {
         MockMvcRequestSpecification givenRestAssuredSpecification = RestAssuredMockMvc.given().standaloneSetup(singleController);
         givenRestAssuredSpecification.contentType("application/json")
                 .body(TxTestDO.builder().column1("hangzhou").column2("小笼包").build())
                 .post("/single/insert").then().log().all();
     }
+
     @Test
-    void mixMethod() {
+    void testMix() {
         MockMvcRequestSpecification givenRestAssuredSpecification = RestAssuredMockMvc.given().standaloneSetup(singleController);
-        MockMvcResponse mockMvcResponse = givenRestAssuredSpecification.when().get("/single/getAll");
-        String print = mockMvcResponse.getBody().print();
+        String id = givenRestAssuredSpecification.param("id", 12).get("/single/getOne").andReturn().asString();
+        TxTestDO result = JSONObject.parseObject(id, TxTestDO.class);
+        result.setColumn2("猪油拌粉");
+        TxTestDO build = TxTestDO.builder().id(result.getId()).column1(result.getColumn1()).column2(result.getColumn2()).build();
+        givenRestAssuredSpecification.contentType("application/json");
+        givenRestAssuredSpecification.body(build).post("/single/update").then().log().all().assertThat();
+
     }
 }

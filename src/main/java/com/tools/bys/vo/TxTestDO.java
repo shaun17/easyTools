@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class TxTestDO {
+    private int id;
     private String column1;
     private String column2;
 }
